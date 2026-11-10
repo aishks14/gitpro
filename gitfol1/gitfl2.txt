@@ -1,0 +1,39 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : gitfl2.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-10
+
+------------------------------------------
+Purpose
+------------------------------------------
+This is the second sample file in Folder 1. Use it to practise
+working with branches: make changes on a new branch, then merge
+them back into the main branch.
+
+------------------------------------------
+Sample Notes
+------------------------------------------
+Note 1: Branches let you work on features without touching main.
+Note 2: Commit often, with clear and short messages.
+Note 3: Change this line on a branch to see a merge in action.
+Note 4: Change it differently on main to practise a merge conflict.
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git checkout -b feature-gitfl2
+git add gitfol1/gitfl2.txt
+git commit -m "Add second sample file to folder 1"
+git checkout main
+git merge feature-gitfl2
+git branch -d feature-gitfl2
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-10 - Initial version of gitfl2.txt

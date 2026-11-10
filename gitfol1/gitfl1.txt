@@ -1,0 +1,47 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : gitfl1.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-10
+
+------------------------------------------
+Purpose
+------------------------------------------
+This is a sample text file in Folder 1 of the gitpro practice
+repository. Use it to try out basic Git commands such as
+add, commit, diff, log, branch and merge.
+
+------------------------------------------
+Folder Structure
+------------------------------------------
+gitpro/
+ |-- gitfol1/   -> gitfl1.txt  (this file)
+ |-- gitfol2/
+ |-- gitfol3/
+ |-- gitfol4/
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: Hello from Folder 1!
+Line 2: This line was added in the first commit.
+Line 3: Edit this line later to see changes with "git diff".
+Line 4: Add more lines here to practise new commits.
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git init
+git add gitfol1/gitfl1.txt
+git commit -m "Add sample text file to folder 1"
+git status
+git log --oneline
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-10 - Initial version of gitfl1.txt
