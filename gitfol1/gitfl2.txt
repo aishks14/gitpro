@@ -22,6 +22,7 @@ Note 1: Branches let you work on features without touching main.
 Note 2: Commit often, with clear and short messages.
 Note 3: Change this line on a branch to see a merge in action.
 Note 4: Change it differently on main to practise a merge conflict.
+Note 5: Delete a branch after merging to keep the repo tidy.
 
 ------------------------------------------
 Practice Commands
