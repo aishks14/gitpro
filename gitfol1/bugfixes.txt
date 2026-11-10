@@ -1,0 +1,39 @@
+==========================================
+ Git Project Repo - Bug Fixes Log
+==========================================
+
+File    : bugfixes.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-10
+
+------------------------------------------
+Purpose
+------------------------------------------
+This is a sample bug fix log. Use it to practise the bug fix
+workflow in Git: create a fix branch, commit the fix, merge it
+back, and undo a commit when a fix turns out to be wrong.
+
+------------------------------------------
+Sample Bug Fixes
+------------------------------------------
+BUG-001 | Fixed   | Typo in the header of gitfl1.txt
+BUG-002 | Fixed   | Wrong folder name in the structure diagram
+BUG-003 | Open    | Missing change log entry in gitfl2.txt
+BUG-004 | Open    | Change this line to "Fixed" on a bugfix branch
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git checkout -b bugfix-004
+git add gitfol1/bugfixes.txt
+git commit -m "Fix BUG-004 in bugfixes log"
+git checkout master
+git merge bugfix-004
+git revert HEAD
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-10 - Initial version of bugfixes.txt
