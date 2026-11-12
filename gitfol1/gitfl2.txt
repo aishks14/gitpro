@@ -24,6 +24,14 @@ git pull origin <branch>   -> fetch and merge a remote branch
 git push -u origin <branch> -> upload a branch and track it
 
 ------------------------------------------
+Tagging Releases
+------------------------------------------
+git tag                     -> list all tags
+git tag -a v1.0 -m "msg"    -> create an annotated tag on this commit
+git show v1.0               -> see the tag and the commit it marks
+git push origin v1.0        -> upload a tag to the remote
+
+------------------------------------------
 Merge Types
 ------------------------------------------
 Fast-forward : the branch pointer just moves ahead, no merge commit.
