@@ -31,6 +31,14 @@ Three-way    : both branches have new commits, Git makes a merge commit.
 Conflict     : both branches changed the same lines, you resolve by hand.
 
 ------------------------------------------
+Inspecting History
+------------------------------------------
+git log --oneline      -> one line per commit, newest first
+git show <commit>      -> what a single commit changed
+git diff <a>..<b>      -> differences between two branches or commits
+git blame <file>       -> who last changed each line of a file
+
+------------------------------------------
 Sample Notes
 ------------------------------------------
 Note 1: Branches let you work on features without touching main.
