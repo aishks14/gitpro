@@ -70,6 +70,14 @@ Note 4: Change it differently on main to practise a merge conflict.
 Note 5: Delete a branch after merging to keep the repo tidy.
 
 ------------------------------------------
+Rebase Workflow
+------------------------------------------
+1. git switch <branch>     -> go to the branch that is behind
+2. git rebase master       -> replay its commits on top of master
+3. git switch master       -> go back to master
+4. git merge <branch>      -> fast-forward, no merge commit needed
+
+------------------------------------------
 Stashing Work
 ------------------------------------------
 git stash        -> shelve uncommitted edits before switching branch
