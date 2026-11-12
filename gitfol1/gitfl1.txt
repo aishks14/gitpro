@@ -55,6 +55,14 @@ Extra Notes
 Use "git log --graph --oneline --all" to see every branch at once.
 
 ------------------------------------------
+Commit Message Tips
+------------------------------------------
+Keep the first line under about 50 characters.
+Start with a verb: Add, Fix, Update, Remove.
+Say what changed and why, not how.
+One logical change per commit.
+
+------------------------------------------
 Change Log
 ------------------------------------------
 v1.0 - 2026-11-10 - Initial version of gitfl1.txt
