@@ -47,6 +47,14 @@ git diff <a>..<b>      -> differences between two branches or commits
 git blame <file>       -> who last changed each line of a file
 
 ------------------------------------------
+Rebasing Basics
+------------------------------------------
+git rebase master      -> replay this branch's commits on top of master
+git rebase --continue  -> carry on after fixing a conflict
+git rebase --abort     -> cancel and go back to how it was
+Never rebase commits that are already pushed and shared.
+
+------------------------------------------
 Sample Notes
 ------------------------------------------
 Note 1: Branches let you work on features without touching main.
