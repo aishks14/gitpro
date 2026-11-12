@@ -16,6 +16,14 @@ working with branches: make changes on a new branch, then merge
 them back into the main branch.
 
 ------------------------------------------
+Working with Remotes
+------------------------------------------
+git remote -v              -> list the remotes linked to this repo
+git fetch origin           -> download new commits without merging
+git pull origin <branch>   -> fetch and merge a remote branch
+git push -u origin <branch> -> upload a branch and track it
+
+------------------------------------------
 Merge Types
 ------------------------------------------
 Fast-forward : the branch pointer just moves ahead, no merge commit.
