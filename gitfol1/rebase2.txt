@@ -1,0 +1,27 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : rebase2.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+Second practice file for "git rebase". Commit it on a branch,
+add a new commit on master, then rebase the branch so its
+commits sit on top of master in one straight line.
+
+------------------------------------------
+Merge vs Rebase
+------------------------------------------
+Merge  : joins two histories with a merge commit, keeps the fork.
+Rebase : replays your commits on the new base, history stays linear.
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: First line, added in the first commit on this branch.
