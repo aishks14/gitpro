@@ -25,6 +25,14 @@ gitpro/
  |-- gitfol4/
 
 ------------------------------------------
+Undoing Changes
+------------------------------------------
+git restore <file>           -> discard uncommitted edits in a file
+git restore --staged <file>  -> unstage a file but keep its edits
+git commit --amend           -> fix the message of the last commit
+git revert <commit>          -> undo a commit with a new commit
+
+------------------------------------------
 Sample Content
 ------------------------------------------
 Line 1: Hello from Folder 1!
