@@ -53,6 +53,12 @@ Ignoring Files (.gitignore)
 build/         -> ignore the whole build folder
 !keep.log      -> but still track this one file
 git rm --cached <file> -> stop tracking a file that is already committed
+Rebasing Basics
+------------------------------------------
+git rebase master      -> replay this branch's commits on top of master
+git rebase --continue  -> carry on after fixing a conflict
+git rebase --abort     -> cancel and go back to how it was
+Never rebase commits that are already pushed and shared.
 
 ------------------------------------------
 Sample Notes
