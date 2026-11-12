@@ -42,6 +42,11 @@ git status
 git log --oneline
 
 ------------------------------------------
+Extra Notes
+------------------------------------------
+Use "git log --graph --oneline --all" to see every branch at once.
+
+------------------------------------------
 Change Log
 ------------------------------------------
 v1.0 - 2026-11-10 - Initial version of gitfl1.txt
