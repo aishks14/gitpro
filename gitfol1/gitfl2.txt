@@ -16,6 +16,13 @@ working with branches: make changes on a new branch, then merge
 them back into the main branch.
 
 ------------------------------------------
+Merge Types
+------------------------------------------
+Fast-forward : the branch pointer just moves ahead, no merge commit.
+Three-way    : both branches have new commits, Git makes a merge commit.
+Conflict     : both branches changed the same lines, you resolve by hand.
+
+------------------------------------------
 Sample Notes
 ------------------------------------------
 Note 1: Branches let you work on features without touching main.
