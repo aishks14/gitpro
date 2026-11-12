@@ -47,6 +47,14 @@ git diff <a>..<b>      -> differences between two branches or commits
 git blame <file>       -> who last changed each line of a file
 
 ------------------------------------------
+Ignoring Files (.gitignore)
+------------------------------------------
+*.log          -> ignore every file ending in .log
+build/         -> ignore the whole build folder
+!keep.log      -> but still track this one file
+git rm --cached <file> -> stop tracking a file that is already committed
+
+------------------------------------------
 Sample Notes
 ------------------------------------------
 Note 1: Branches let you work on features without touching main.
