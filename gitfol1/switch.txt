@@ -1,0 +1,34 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : switch.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+This file is for practising "git switch", the newer and clearer
+command for moving between branches and creating new ones.
+
+------------------------------------------
+Switch Commands
+------------------------------------------
+git switch <branch>        -> move to an existing branch
+git switch -c <branch>     -> create a new branch and move to it
+git switch -              -> jump back to the previous branch
+git switch --detach <id>   -> look at an old commit without a branch
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: Hello from the switch practice file!
+Line 2: Commit this file, then switch to another branch and back.
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of switch.txt
