@@ -77,7 +77,7 @@ Rebase Workflow
 3. git switch master       -> go back to master
 4. git merge <branch>      -> fast-forward, no merge commit needed
 
-------------------------------------------xx
+------------------------------------------
 Stashing Work
 ------------------------------------------
 git stash        -> shelve uncommitted edits before switching branch
