@@ -1,0 +1,21 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : rebase.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+This file is for practising "git rebase". Make a few commits to
+it on a branch, then replay them on top of master to get a
+straight, linear history with no merge commit.
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: First line, added in the first rebase practice commit.
