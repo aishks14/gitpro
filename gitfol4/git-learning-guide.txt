@@ -1,0 +1,535 @@
+==========================================
+ Git Project Repo - Folder 4 (gitfol4)
+==========================================
+
+File    : git-learning-guide.txt
+Folder  : gitfol4
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+One file that collects all the Git learning material: the topics
+practised in this repository (Part A) and the important topics
+that have not been practised here yet (Part B). Links for further
+reading are in git-references.txt in the same folder.
+
+------------------------------------------
+Contents
+------------------------------------------
+Part A - Practised in this repository
+  A1.  The three areas
+  A2.  Everyday commands
+  A3.  Viewing history and the graph
+  A4.  Comparing changes
+  A5.  Branches and switching
+  A6.  Merging and merge types
+  A7.  Merge conflicts
+  A8.  Stashing
+  A9.  Rebasing
+  A10. Undoing changes
+  A11. Ignoring files
+  A12. Remotes and pull requests
+  A13. Tags
+  A14. Commit message tips
+Part B - Not practised here yet
+  B1.  First-time setup and configuration
+  B2.  How Git stores data
+  B3.  HEAD, detached HEAD and commit references
+  B4.  Reset and reflog
+  B5.  Cherry-pick
+  B6.  Interactive rebase
+  B7.  Amend, fixup and autosquash
+  B8.  Restoring single files from history
+  B9.  Cleaning untracked files
+  B10. Searching history
+  B11. Bisect
+  B12. Remote branches in depth
+  B13. Forks and upstream
+  B14. Force pushing safely
+  B15. Worktrees
+  B16. Submodules
+  B17. Large files (Git LFS)
+  B18. Hooks
+  B19. Aliases
+  B20. Line endings
+  B21. Signing commits
+  B22. Team workflows
+  B23. Common mistakes and fixes
+Quick Reference
+
+==========================================
+ PART A - PRACTISED IN THIS REPOSITORY
+==========================================
+
+------------------------------------------
+A1. The Three Areas
+------------------------------------------
+Working folder : files as you see and edit them on disk
+Staging area   : edits picked for the next commit (git add)
+Repository     : committed history, saved for good (git commit)
+
+A file moves: edit -> git add -> git commit.
+Uncommitted edits belong to the working folder, not to a branch.
+
+------------------------------------------
+A2. Everyday Commands
+------------------------------------------
+git init                 -> turn a folder into a repository
+git status               -> what is changed, staged or untracked
+git add <file>           -> stage one file
+git add .                -> stage everything in the current folder
+git commit -m "message"  -> save the staged edits as a commit
+git log --oneline        -> list commits, one line each
+
+------------------------------------------
+A3. Viewing History and the Graph
+------------------------------------------
+git log --graph --oneline --all --decorate
+                       -> every branch drawn as a graph
+git show <commit>      -> what a single commit changed
+git blame <file>       -> who last changed each line of a file
+git log -- <file>      -> only commits that touched one file
+git log -p             -> history with the full diff of each commit
+
+In VS Code the Source Control panel has a built-in graph, and the
+"Git Graph" extension gives a richer view.
+
+------------------------------------------
+A4. Comparing Changes
+------------------------------------------
+git diff               -> unstaged edits vs the staged version
+git diff --staged      -> staged edits vs the last commit
+git diff HEAD          -> all uncommitted edits vs the last commit
+git diff <a>..<b>      -> differences between two branches or commits
+git diff --stat        -> only a summary of which files changed
+
+------------------------------------------
+A5. Branches and Switching
+------------------------------------------
+git branch                 -> list local branches
+git branch -a              -> list local and remote branches
+git switch <branch>        -> move to an existing branch
+git switch -c <branch>     -> create a new branch and move to it
+git switch -               -> jump back to the previous branch
+git branch -d <branch>     -> delete a merged branch
+git branch -m <new-name>   -> rename the current branch
+
+Git lets you switch with uncommitted edits when the edited file is
+the same on both branches; the edits simply come along. It refuses
+only when the switch would overwrite your edits:
+  "Your local changes to the following files would be overwritten"
+Fix: commit the edits or stash them first.
+
+------------------------------------------
+A6. Merging and Merge Types
+------------------------------------------
+git merge <branch>     -> bring another branch into the current one
+
+Fast-forward : the branch pointer just moves ahead, no merge commit.
+Three-way    : both branches have new commits, Git makes a merge commit.
+Conflict     : both branches changed the same lines, you resolve by hand.
+
+git merge --no-ff <branch>  -> always create a merge commit
+git merge --abort           -> cancel a merge that is in progress
+
+------------------------------------------
+A7. Merge Conflicts
+------------------------------------------
+A conflict happens when two branches change the same lines, or
+insert different lines at the same place. Git marks the file:
+
+  <<<<<<< HEAD
+  your version
+  =======
+  the other branch's version
+  >>>>>>> other-branch
+
+To resolve:
+1. Edit the file and keep what you want (one side or both).
+2. Delete all three marker lines.
+3. git add <file>
+4. git commit
+
+Check the result carefully: it is easy to delete a blank line or a
+heading by mistake while removing the markers.
+
+------------------------------------------
+A8. Stashing
+------------------------------------------
+git stash                  -> shelve uncommitted edits
+git stash push -m "note"   -> shelve with a description
+git stash list             -> show everything that is shelved
+git stash show -p 0        -> see what a stash contains
+git stash apply 1          -> apply stash 1 and keep it in the list
+git stash pop              -> apply the latest stash and remove it
+git stash drop 0           -> delete one stash
+git stash -u               -> also shelve untracked files
+
+In PowerShell write "git stash apply 1" or quote the full name,
+'stash@{1}', because the braces are special characters.
+A stash will not apply onto a file that has uncommitted edits;
+commit those first.
+
+------------------------------------------
+A9. Rebasing
+------------------------------------------
+Rebase replays the commits of your branch on top of another branch,
+giving a straight history with no merge commit.
+
+git rebase master      -> replay this branch on top of master
+git rebase --continue  -> carry on after fixing a conflict
+git rebase --abort     -> cancel and go back to how it was
+
+Merge  : keeps the fork and adds a merge commit.
+Rebase : rewrites your commits as new copies, history stays linear.
+
+Rebased commits get new ids. Never rebase commits that are already
+pushed and shared. See gitfol1/rebase-notes.txt for the worked
+example from this repository.
+
+------------------------------------------
+A10. Undoing Changes
+------------------------------------------
+git restore <file>           -> discard uncommitted edits in a file
+git restore --staged <file>  -> unstage a file but keep its edits
+git commit --amend           -> fix the last commit or its message
+git revert <commit>          -> undo a commit with a new commit
+
+Revert is safe on shared branches because it adds history instead
+of rewriting it.
+
+------------------------------------------
+A11. Ignoring Files
+------------------------------------------
+The .gitignore file lists what Git should not track.
+
+*.log          -> ignore every file ending in .log
+build/         -> ignore the whole build folder
+!keep.log      -> but still track this one file
+node_modules   -> ignore dependency folders
+.env           -> ignore secrets and local settings
+
+git rm --cached <file>  -> stop tracking a file already committed
+.gitignore has no effect on files that are already tracked.
+
+------------------------------------------
+A12. Remotes and Pull Requests
+------------------------------------------
+git remote -v                -> list the remotes linked to this repo
+git remote add origin <url>  -> link a remote repository
+git push -u origin <branch>  -> upload a branch and track it
+git fetch origin             -> download new commits without merging
+git pull origin <branch>     -> fetch and merge a remote branch
+git clone <url>              -> copy a remote repository to your machine
+
+Pull request flow on GitHub:
+1. Push your branch.
+2. Open a pull request from the branch into master.
+3. Review, then merge it on GitHub.
+4. Locally: git switch master, then git pull origin master.
+
+------------------------------------------
+A13. Tags
+------------------------------------------
+git tag                     -> list all tags
+git tag -a v1.0 -m "msg"    -> create an annotated tag on this commit
+git show v1.0               -> see the tag and the commit it marks
+git push origin v1.0        -> upload a tag to the remote
+git push origin --tags      -> upload all tags
+
+------------------------------------------
+A14. Commit Message Tips
+------------------------------------------
+Keep the first line under about 50 characters.
+Start with a verb: Add, Fix, Update, Remove.
+Say what changed and why, not how.
+One logical change per commit.
+
+==========================================
+ PART B - NOT PRACTISED HERE YET
+==========================================
+
+------------------------------------------
+B1. First-time Setup and Configuration
+------------------------------------------
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global init.defaultBranch main
+git config --global core.editor "code --wait"
+git config --list --show-origin   -> see every setting and its file
+
+Levels: --system (all users), --global (your user), --local (one
+repository). The most specific level wins.
+
+------------------------------------------
+B2. How Git Stores Data
+------------------------------------------
+Blob   : the contents of one file
+Tree   : a folder listing, pointing to blobs and other trees
+Commit : a snapshot (one tree) plus author, message and parent(s)
+Tag    : a named pointer to a commit
+
+Every object is named by a hash of its contents. A branch is only
+a small file holding the id of one commit, so creating a branch is
+instant. A commit stores a full snapshot, not a diff.
+
+git cat-file -p <id>   -> print any object
+git cat-file -t <id>   -> show the type of an object
+
+------------------------------------------
+B3. HEAD, Detached HEAD and Commit References
+------------------------------------------
+HEAD     : where you are now, normally the current branch
+HEAD~1   : the commit before HEAD
+HEAD~3   : three commits back
+HEAD^2   : the second parent of a merge commit
+@{u}     : the upstream branch of the current branch
+
+Detached HEAD means HEAD points at a commit, not a branch. New
+commits made there are not on any branch. To keep them:
+git switch -c <new-branch>
+
+------------------------------------------
+B4. Reset and Reflog
+------------------------------------------
+git reset --soft HEAD~1   -> undo the commit, keep edits staged
+git reset --mixed HEAD~1  -> undo the commit, keep edits unstaged
+git reset --hard HEAD~1   -> undo the commit and discard the edits
+
+Reset moves the branch backwards and rewrites history, so use it
+only on commits that are not pushed.
+
+git reflog                -> every place HEAD has pointed to
+git reset --hard <id>     -> go back to a commit found in the reflog
+
+The reflog is the safety net: commits removed by reset or rebase
+stay recoverable for about 90 days by default.
+
+------------------------------------------
+B5. Cherry-pick
+------------------------------------------
+git cherry-pick <commit>          -> copy one commit onto this branch
+git cherry-pick <a>^..<b>         -> copy a range of commits
+git cherry-pick --continue        -> carry on after fixing a conflict
+git cherry-pick --abort           -> cancel
+
+The copy gets a new commit id. Useful for taking one bug fix to
+another branch without merging everything.
+
+------------------------------------------
+B6. Interactive Rebase
+------------------------------------------
+git rebase -i HEAD~3   -> edit the last three commits
+
+In the list that opens, change the word in front of each commit:
+pick    : keep the commit as it is
+reword  : keep the changes, edit the message
+edit    : stop here to change the commit
+squash  : join into the previous commit, combine messages
+fixup   : join into the previous commit, drop this message
+drop    : remove the commit
+
+Use it to tidy your own commits before pushing or opening a pull
+request. Do not use it on shared history.
+
+------------------------------------------
+B7. Amend, Fixup and Autosquash
+------------------------------------------
+git commit --amend --no-edit       -> add staged edits to the last commit
+git commit --fixup <commit>        -> make a fix for an older commit
+git rebase -i --autosquash <base>  -> fold the fixups in automatically
+
+------------------------------------------
+B8. Restoring Single Files from History
+------------------------------------------
+git restore --source <commit> <file>  -> bring back an old version
+git show <commit>:<path>              -> print an old version
+git checkout <commit> -- <file>       -> older form of the same thing
+
+------------------------------------------
+B9. Cleaning Untracked Files
+------------------------------------------
+git clean -n    -> preview what would be deleted
+git clean -f    -> delete untracked files
+git clean -fd   -> delete untracked files and folders
+git clean -fdx  -> also delete ignored files
+
+Always run -n first. Cleaned files do not go to the reflog and
+cannot be recovered through Git.
+
+------------------------------------------
+B10. Searching History
+------------------------------------------
+git grep "text"              -> search tracked files
+git log --grep="text"        -> search commit messages
+git log -S"text"             -> commits that added or removed the text
+git log --author="name"      -> commits by one author
+git log --since="2 weeks ago"
+git shortlog -sn             -> number of commits per author
+
+------------------------------------------
+B11. Bisect
+------------------------------------------
+Finds the commit that introduced a bug by halving the search.
+
+git bisect start
+git bisect bad               -> the current commit is broken
+git bisect good <commit>     -> this older commit worked
+  test, then mark each step with: git bisect good / git bisect bad
+git bisect reset             -> finish and return to where you were
+
+------------------------------------------
+B12. Remote Branches in Depth
+------------------------------------------
+origin/master is your local copy of the remote branch; it updates
+only on fetch, pull or push.
+
+git branch -vv                    -> show what each branch tracks
+git push -u origin <branch>       -> set the upstream
+git fetch --prune                 -> remove references to deleted remote branches
+git push origin --delete <branch> -> delete a branch on the remote
+git pull --rebase                 -> fetch, then rebase instead of merge
+
+------------------------------------------
+B13. Forks and Upstream
+------------------------------------------
+A fork is your own copy of someone else's repository on GitHub.
+
+git remote add upstream <original-url>
+git fetch upstream
+git switch master
+git merge upstream/master    -> bring your fork up to date
+git push origin master
+
+origin = your fork, upstream = the original project.
+
+------------------------------------------
+B14. Force Pushing Safely
+------------------------------------------
+After a rebase or amend of pushed commits, a normal push is
+rejected because the histories differ.
+
+git push --force-with-lease  -> overwrite only if nobody else pushed
+git push --force             -> overwrite no matter what (avoid)
+
+Force push only your own branch, never master or a shared branch.
+
+------------------------------------------
+B15. Worktrees
+------------------------------------------
+Several branches checked out in separate folders at the same time,
+sharing one repository. An alternative to stashing.
+
+git worktree add ../gitpro-fix <branch>
+git worktree list
+git worktree remove ../gitpro-fix
+
+------------------------------------------
+B16. Submodules
+------------------------------------------
+A repository placed inside another, pinned to one commit.
+
+git submodule add <url> <path>
+git clone --recurse-submodules <url>
+git submodule update --init --recursive
+
+------------------------------------------
+B17. Large Files (Git LFS)
+------------------------------------------
+Git is slow with large binary files. Git LFS stores them outside
+the repository and keeps small pointer files in their place.
+
+git lfs install
+git lfs track "*.psd"
+git add .gitattributes
+
+------------------------------------------
+B18. Hooks
+------------------------------------------
+Scripts in .git/hooks that run on Git events.
+
+pre-commit  : runs before a commit, for linting or tests
+commit-msg  : checks the commit message
+pre-push    : runs before a push
+
+Hooks are local and are not shared by clone. Teams share them with
+a tool, or with: git config core.hooksPath <folder>
+
+------------------------------------------
+B19. Aliases
+------------------------------------------
+git config --global alias.st status
+git config --global alias.co switch
+git config --global alias.graph "log --graph --oneline --all --decorate"
+
+Then "git graph" draws the full branch graph.
+
+------------------------------------------
+B20. Line Endings
+------------------------------------------
+Windows uses CRLF line endings, Linux and macOS use LF. The warning
+"LF will be replaced by CRLF" comes from this setting:
+
+git config --global core.autocrlf true    -> usual choice on Windows
+git config --global core.autocrlf input   -> usual choice on Linux/macOS
+
+A .gitattributes file with "* text=auto" makes the rule the same
+for everyone who uses the repository.
+
+------------------------------------------
+B21. Signing Commits
+------------------------------------------
+Proves that a commit really came from you; GitHub shows "Verified".
+
+git config --global commit.gpgsign true
+git commit -S -m "message"
+git log --show-signature
+
+------------------------------------------
+B22. Team Workflows
+------------------------------------------
+GitHub Flow  : short branches off main, pull request, merge, deploy.
+Git Flow     : long-lived develop and main, plus feature, release
+               and hotfix branches.
+Trunk-based  : everyone commits small changes to one main branch,
+               very short-lived branches, feature flags.
+
+Pull request merge options on GitHub:
+Merge commit     : keeps every commit and adds a merge commit.
+Squash and merge : turns the whole branch into one commit.
+Rebase and merge : replays the commits, no merge commit.
+
+------------------------------------------
+B23. Common Mistakes and Fixes
+------------------------------------------
+Wrong commit message       -> git commit --amend
+Forgot a file in a commit  -> git add <file>, git commit --amend --no-edit
+Committed on wrong branch  -> git switch <right>, git cherry-pick <id>,
+                              then remove it from the wrong branch
+Want to undo a pushed commit -> git revert <commit>
+Lost a commit after reset  -> git reflog, then git reset --hard <id>
+Staged the wrong file      -> git restore --staged <file>
+Committed a secret         -> change the secret first, then remove it
+                              from history with git filter-repo
+Merge went wrong           -> git merge --abort
+Rebase went wrong          -> git rebase --abort
+
+==========================================
+ QUICK REFERENCE
+==========================================
+Start     : init, clone, config
+Save      : status, add, commit
+Inspect   : log, show, diff, blame, grep
+Branch    : branch, switch, merge, rebase, cherry-pick
+Shelve    : stash
+Undo      : restore, revert, reset, reflog, clean
+Share     : remote, fetch, pull, push, tag
+Find bugs : bisect
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of git-learning-guide.txt
