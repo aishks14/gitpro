@@ -1,0 +1,271 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : git-extra-topics.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+Git and GitHub topics that are not covered in any other file of
+this repository. Each section is short: what the feature is for
+and the few commands needed to try it.
+
+------------------------------------------
+Contents
+------------------------------------------
+1.  Staging part of a file
+2.  Moving, renaming and deleting files
+3.  Tracking empty folders
+4.  Commit ranges: two dots and three dots
+5.  Formatting the log
+6.  Following a file through renames
+7.  Describing a commit by its nearest tag
+8.  Logging in to GitHub: HTTPS tokens and SSH keys
+9.  Shallow, partial and sparse clones
+10. Sharing work without a server: patches and bundles
+11. Exporting a snapshot
+12. Notes on commits
+13. Comparing two versions of a branch
+14. Repository health and clean-up
+15. Git attributes
+16. Commit templates and author mapping
+17. Version numbers
+18. GitHub features around a repository
+19. Automation with GitHub Actions
+20. Security habits
+
+------------------------------------------
+1. Staging Part of a File
+------------------------------------------
+One file can hold two unrelated edits. Stage them separately to
+make two clean commits.
+
+git add -p <file>        -> go through the edits one block at a time
+  y = stage this block, n = skip it, s = split it smaller, q = quit
+git restore -p <file>    -> discard edits one block at a time
+git reset -p             -> unstage one block at a time
+git commit -v            -> show the diff while writing the message
+
+------------------------------------------
+2. Moving, Renaming and Deleting Files
+------------------------------------------
+git mv old.txt new.txt   -> rename or move a file and stage it
+git rm <file>            -> delete a file and stage the deletion
+git rm -r <folder>       -> delete a folder and its contents
+
+Git does not store renames. It notices that a deleted file and a
+new file have nearly the same content and reports a rename.
+
+------------------------------------------
+3. Tracking Empty Folders
+------------------------------------------
+Git tracks files, not folders, so an empty folder is never
+committed. That is why gitfol2, gitfol3 and gitfol4 were missing
+on branches where they had no files.
+
+The usual fix is a placeholder file inside the folder:
+  gitfol4/.gitkeep
+The name .gitkeep is only a convention; any file works.
+
+------------------------------------------
+4. Commit Ranges: Two Dots and Three Dots
+------------------------------------------
+git log master..feature    -> commits on feature that master lacks
+git log feature..master    -> commits on master that feature lacks
+git log master...feature   -> commits on either side, not on both
+git log --left-right master...feature
+                           -> the same, marked < or > by side
+
+git diff master..feature   -> compare the two branch tips
+git diff master...feature  -> what feature changed since it split
+                              from master (what a pull request shows)
+
+------------------------------------------
+5. Formatting the Log
+------------------------------------------
+git log --pretty=format:"%h %an %ar %s"
+  %h short id, %an author, %ar relative date, %s subject
+git log --stat             -> files changed in each commit
+git log --name-only        -> only the file names
+git log -n 5               -> the last five commits
+git log --no-merges        -> hide merge commits
+git log --first-parent     -> follow only the main line of a branch
+git log --reverse          -> oldest first
+
+------------------------------------------
+6. Following a File Through Renames
+------------------------------------------
+git log --follow -- <file>     -> history across renames
+git blame -L 10,20 <file>      -> blame only lines 10 to 20
+git log -L 10,20:<file>        -> history of those lines only
+
+------------------------------------------
+7. Describing a Commit by Its Nearest Tag
+------------------------------------------
+git describe --tags
+  Prints for example: v1.0-3-g4e19193
+  = three commits after tag v1.0, at commit 4e19193.
+Used to give builds a readable version name.
+
+------------------------------------------
+8. Logging in to GitHub: HTTPS Tokens and SSH Keys
+------------------------------------------
+GitHub does not accept your account password for Git commands.
+
+HTTPS  : the remote URL starts with https://
+         You sign in through the browser, or use a personal
+         access token in place of a password. Git Credential
+         Manager, included in Git for Windows, saves it for you.
+
+SSH    : the remote URL starts with git@github.com:
+         ssh-keygen -t ed25519 -C "you@example.com"
+         Add the .pub file contents under GitHub Settings ->
+         SSH and GPG keys.
+         ssh -T git@github.com   -> test the connection
+
+git remote set-url origin <new-url>  -> change between the two
+
+------------------------------------------
+9. Shallow, Partial and Sparse Clones
+------------------------------------------
+For very large repositories, download less.
+
+git clone --depth 1 <url>            -> only the latest commit
+git fetch --unshallow                -> get the full history later
+git clone --filter=blob:none <url>   -> history now, file contents
+                                        only when they are needed
+git sparse-checkout set <folder>     -> keep only some folders in
+                                        the working folder
+
+------------------------------------------
+10. Sharing Work Without a Server: Patches and Bundles
+------------------------------------------
+git format-patch -1 <commit>   -> write a commit to a .patch file
+git am <file.patch>            -> apply it as a commit, keeping
+                                  author and message
+git diff > changes.diff        -> plain diff, no commit data
+git apply changes.diff         -> apply a plain diff
+
+git bundle create repo.bundle --all  -> whole repository in one file
+git clone repo.bundle <folder>       -> clone from that file
+
+------------------------------------------
+11. Exporting a Snapshot
+------------------------------------------
+git archive --format=zip -o gitpro.zip HEAD
+  A zip of the files at one commit, without the .git folder.
+  Good for handing over a release.
+
+------------------------------------------
+12. Notes on Commits
+------------------------------------------
+git notes add -m "Tested on Windows 11" <commit>
+git log --show-notes
+  Attaches extra text to a commit without changing its id.
+  Notes are not pushed unless you push refs/notes yourself.
+
+------------------------------------------
+13. Comparing Two Versions of a Branch
+------------------------------------------
+git range-diff master old-branch new-branch
+  Shows what changed between a branch before and after a rebase,
+  commit by commit. Useful when reviewing a rebased pull request.
+
+------------------------------------------
+14. Repository Health and Clean-up
+------------------------------------------
+git count-objects -vH    -> how much space the repository uses
+git gc                   -> pack objects and remove unreachable ones
+git fsck                 -> check the repository for damage
+git fsck --lost-found    -> list commits that no branch points to
+git maintenance start    -> schedule clean-up in the background
+git prune                -> delete unreachable objects (gc runs it)
+
+------------------------------------------
+15. Git Attributes
+------------------------------------------
+A .gitattributes file sets rules per path, shared with everyone.
+
+*.txt   text eol=lf      -> always store and check out with LF
+*.png   binary           -> never try to diff or merge as text
+*.lock  merge=ours       -> on conflict keep our version
+docs/   export-ignore    -> leave out of "git archive"
+
+------------------------------------------
+16. Commit Templates and Author Mapping
+------------------------------------------
+git config --global commit.template ~/.gitmessage
+  Opens every new commit message with your own outline.
+
+.mailmap file:
+  Proper Name <new@example.com> <old@example.com>
+  Merges different names or emails of one person in git log
+  and git shortlog.
+
+------------------------------------------
+17. Version Numbers
+------------------------------------------
+Semantic versioning uses MAJOR.MINOR.PATCH, for example v2.4.1.
+
+MAJOR : a change that breaks existing use
+MINOR : a new feature that keeps existing use working
+PATCH : a bug fix only
+
+Tag each release with its version: git tag -a v2.4.1 -m "..."
+A CHANGELOG file lists what changed in each version for readers.
+
+------------------------------------------
+18. GitHub Features Around a Repository
+------------------------------------------
+Issues            : track bugs, tasks and ideas.
+Pull requests     : propose, discuss and review a branch.
+Draft pull request: share work early, cannot be merged yet.
+Code review       : comment on lines, approve or request changes.
+Branch protection : require reviews or passing checks before a
+                    merge into master, block force pushes.
+CODEOWNERS file   : names who must review which paths.
+Releases          : a tag plus notes and downloadable files.
+README.md         : the front page of the repository.
+LICENSE           : states how others may use the code.
+GitHub Pages      : host a website from a branch or folder.
+Gists             : share a single file or snippet.
+
+Closing an issue from a commit or pull request:
+  write "Fixes #12" in the message and issue 12 closes on merge.
+
+------------------------------------------
+19. Automation with GitHub Actions
+------------------------------------------
+Workflows are YAML files in .github/workflows/. They run on events
+such as a push or a pull request.
+
+Typical uses: run tests on every pull request, check formatting,
+build and publish a release when a tag is pushed.
+
+Continuous integration (CI) means every change is built and tested
+automatically before it is merged.
+
+------------------------------------------
+20. Security Habits
+------------------------------------------
+Note 1: Never commit passwords, tokens or keys. Keep them in a
+        file listed in .gitignore, such as .env.
+Note 2: Deleting a secret in a new commit does not remove it from
+        history. Change the secret first, then clean the history.
+Note 3: Turn on two-factor authentication for your GitHub account.
+Note 4: Give access tokens only the permissions and lifetime they
+        need.
+Note 5: Check "git status" and "git diff --staged" before every
+        commit so nothing unexpected is included.
+Note 6: GitHub secret scanning and push protection can block a
+        push that contains a known kind of secret.
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of git-extra-topics.txt
