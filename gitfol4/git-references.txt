@@ -1,0 +1,155 @@
+==========================================
+ Git Project Repo - Folder 4 (gitfol4)
+==========================================
+
+File    : git-references.txt
+Folder  : gitfol4
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+Where to read more about each topic in git-learning-guide.txt.
+The first part lists general resources; the second part maps each
+section of the guide (A1-A14, B1-B23) to its official manual page.
+
+------------------------------------------
+Official Documentation
+------------------------------------------
+Git home page          : https://git-scm.com
+Reference manual       : https://git-scm.com/docs
+Pro Git book (free)    : https://git-scm.com/book/en/v2
+Git glossary           : https://git-scm.com/docs/gitglossary
+Everyday Git           : https://git-scm.com/docs/giteveryday
+Git tutorial           : https://git-scm.com/docs/gittutorial
+GitHub Docs            : https://docs.github.com
+GitHub Git guides      : https://github.com/git-guides
+
+Built-in help, no internet needed:
+git help <command>     -> full manual page, e.g. git help rebase
+git <command> -h       -> short list of options
+
+------------------------------------------
+Interactive Practice
+------------------------------------------
+Learn Git Branching    : https://learngitbranching.js.org
+  Visual exercises for branch, merge, rebase and cherry-pick.
+GitHub Skills          : https://skills.github.com
+  Short guided courses run inside GitHub repositories.
+Oh My Git!             : https://ohmygit.org
+  A game that shows the commit graph as you type commands.
+
+------------------------------------------
+Tutorials and Guides
+------------------------------------------
+Atlassian Git tutorials : https://www.atlassian.com/git/tutorials
+MIT Missing Semester    : https://missing.csail.mit.edu/2020/version-control/
+  One lecture that explains Git from its data model upwards.
+Dangit, Git!?!          : https://dangitgit.com
+  Plain-language fixes for common mistakes.
+Git cheat sheet (GitHub): https://education.github.com/git-cheat-sheet-education.pdf
+
+------------------------------------------
+Tools Used in This Project
+------------------------------------------
+Git for Windows        : https://gitforwindows.org
+VS Code source control : https://code.visualstudio.com/docs/sourcecontrol/overview
+Git Graph extension    : https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph
+GitHub CLI             : https://cli.github.com
+
+------------------------------------------
+Conventions and Templates
+------------------------------------------
+.gitignore templates   : https://github.com/github/gitignore
+Conventional Commits   : https://www.conventionalcommits.org
+GitHub Flow            : https://docs.github.com/en/get-started/using-github/github-flow
+Git Flow (original)    : https://nvie.com/posts/a-successful-git-branching-model/
+Trunk-based development: https://trunkbaseddevelopment.com
+
+------------------------------------------
+Section Map - Part A (practised here)
+------------------------------------------
+A1.  The three areas      : https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
+A2.  Everyday commands    : https://git-scm.com/docs/git-add
+                            https://git-scm.com/docs/git-commit
+                            https://git-scm.com/docs/git-status
+A3.  History and graph    : https://git-scm.com/docs/git-log
+                            https://git-scm.com/docs/git-show
+                            https://git-scm.com/docs/git-blame
+A4.  Comparing changes    : https://git-scm.com/docs/git-diff
+A5.  Branches, switching  : https://git-scm.com/docs/git-branch
+                            https://git-scm.com/docs/git-switch
+A6.  Merging              : https://git-scm.com/docs/git-merge
+A7.  Merge conflicts      : https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+A8.  Stashing             : https://git-scm.com/docs/git-stash
+A9.  Rebasing             : https://git-scm.com/docs/git-rebase
+                            https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+A10. Undoing changes      : https://git-scm.com/docs/git-restore
+                            https://git-scm.com/docs/git-revert
+A11. Ignoring files       : https://git-scm.com/docs/gitignore
+A12. Remotes, pull requests : https://git-scm.com/docs/git-remote
+                            https://git-scm.com/docs/git-push
+                            https://git-scm.com/docs/git-pull
+                            https://docs.github.com/en/pull-requests
+A13. Tags                 : https://git-scm.com/docs/git-tag
+A14. Commit messages      : https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project
+
+------------------------------------------
+Section Map - Part B (not practised yet)
+------------------------------------------
+B1.  Setup and config     : https://git-scm.com/docs/git-config
+B2.  How Git stores data  : https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+B3.  HEAD and references  : https://git-scm.com/docs/gitrevisions
+B4.  Reset and reflog     : https://git-scm.com/docs/git-reset
+                            https://git-scm.com/docs/git-reflog
+                            https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified
+B5.  Cherry-pick          : https://git-scm.com/docs/git-cherry-pick
+B6.  Interactive rebase   : https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+B7.  Amend and fixup      : https://git-scm.com/docs/git-commit
+B8.  Restoring old files  : https://git-scm.com/docs/git-restore
+B9.  Cleaning             : https://git-scm.com/docs/git-clean
+B10. Searching            : https://git-scm.com/docs/git-grep
+                            https://git-scm.com/book/en/v2/Git-Tools-Searching
+B11. Bisect               : https://git-scm.com/docs/git-bisect
+B12. Remote branches      : https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+                            https://git-scm.com/docs/git-fetch
+B13. Forks and upstream   : https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks
+B14. Force pushing        : https://git-scm.com/docs/git-push
+B15. Worktrees            : https://git-scm.com/docs/git-worktree
+B16. Submodules           : https://git-scm.com/book/en/v2/Git-Tools-Submodules
+B17. Git LFS              : https://git-lfs.com
+B18. Hooks                : https://git-scm.com/docs/githooks
+B19. Aliases              : https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases
+B20. Line endings         : https://git-scm.com/docs/gitattributes
+                            https://docs.github.com/en/get-started/git-basics/configuring-git-to-handle-line-endings
+B21. Signing commits      : https://docs.github.com/en/authentication/managing-commit-signature-verification
+B22. Team workflows       : https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows
+                            https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges
+B23. Mistakes and fixes   : https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
+                            https://github.com/newren/git-filter-repo
+
+------------------------------------------
+Files in This Repository
+------------------------------------------
+gitfol1/gitfl1.txt        : basic commands, undoing, commit message tips
+gitfol1/gitfl2.txt        : remotes, tags, merge types, history, rebase, stash
+gitfol1/bugfixes.txt      : bug fix practice file
+gitfol1/rebase.txt        : first rebase practice file
+gitfol1/rebase2.txt       : second rebase practice file
+gitfol1/rebase-notes.txt  : what the rebase practice showed
+gitfol1/switch.txt        : git switch practice
+gitfol2/gitfl1.txt        : reset and reflog
+gitfol2/gitfl2.txt        : cherry-pick
+gitfol3/gitfl1.txt        : remote workflow, fetch vs pull
+gitfol4/git-learning-guide.txt : the full learning guide
+gitfol4/git-references.txt     : this file
+
+Some of these files exist only on certain branches until the
+branches are merged into master.
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of git-references.txt
