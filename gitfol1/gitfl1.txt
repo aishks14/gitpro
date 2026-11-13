@@ -16,6 +16,13 @@ repository. Use it to try out basic Git commands such as
 add, commit, diff, log, branch and merge.
 
 ------------------------------------------
+The Three Areas
+------------------------------------------
+Working folder : files as you see and edit them on disk
+Staging area   : edits picked for the next commit (git add)
+Repository     : committed history, saved for good (git commit)
+
+------------------------------------------
 Folder Structure
 ------------------------------------------
 gitpro/
@@ -53,6 +60,14 @@ git log --oneline
 Extra Notes
 ------------------------------------------
 Use "git log --graph --oneline --all" to see every branch at once.
+
+------------------------------------------
+Commit Message Tips
+------------------------------------------
+Keep the first line under about 50 characters.
+Start with a verb: Add, Fix, Update, Remove.
+Say what changed and why, not how.
+One logical change per commit.
 
 ------------------------------------------
 Change Log

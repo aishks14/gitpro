@@ -1,0 +1,89 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : rebase-notes.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+A summary of what was learned while practising "git rebase" in
+this repository, using the two practice branches
+aishhks14-git-rebase and aishks14-git-rebase-2.
+
+------------------------------------------
+What Rebase Does
+------------------------------------------
+Rebase takes the commits that exist only on your branch and
+replays them, one by one, on top of another branch (the new
+base). The result is a straight line of history, as if the
+branch had been started from the latest master.
+
+------------------------------------------
+Merge vs Rebase
+------------------------------------------
+Merge  : joins two histories with a merge commit, keeps the fork.
+Rebase : replays your commits on the new base, history stays linear.
+Merge keeps the true record of what happened.
+Rebase gives a cleaner log that is easier to read.
+
+------------------------------------------
+Attempt 1 - aishhks14-git-rebase
+------------------------------------------
+Branch commit : 18baedf "start rebase mode in the branch"
+What was run  : git merge master
+Result        : merge commit 39826d3, the history still forks.
+Lesson        : "git merge master" and "git pull" both create a
+                merge commit. Neither of them is a rebase.
+
+------------------------------------------
+Attempt 2 - aishks14-git-rebase-2
+------------------------------------------
+Branch commit : 63b6090 "rebase branch second"
+New base      : 7a8916d "add rebase branch 2 work" (on master)
+What was run  : git rebase master
+Result        : the commit became 3d3a327, sitting directly on
+                top of master with no merge commit.
+Lesson        : the commit id changed from 63b6090 to 3d3a327.
+                Rebase does not move commits, it writes new copies.
+
+------------------------------------------
+Steps That Worked
+------------------------------------------
+1. git switch -c <branch>   -> start a branch from master
+2. commit work on the branch
+3. commit something new on master, so the branch is behind
+4. git switch <branch>      -> go back to the branch
+5. git rebase master        -> replay the branch on top of master
+6. git switch master
+7. git merge <branch>       -> fast-forward, no merge commit
+
+------------------------------------------
+If a Conflict Happens
+------------------------------------------
+git status              -> see which files are in conflict
+edit the files, remove the <<<<<<< ======= >>>>>>> markers
+git add <file>          -> mark the conflict as fixed
+git rebase --continue   -> carry on with the next commit
+git rebase --abort      -> cancel and go back to how it was
+
+------------------------------------------
+Key Takeaways
+------------------------------------------
+Note 1: Rebase needs the base branch to have moved ahead,
+        otherwise there is nothing to replay onto.
+Note 2: Rebased commits get new ids, the old ones are replaced.
+Note 3: Never rebase commits that are already pushed and shared,
+        other people's history will no longer match yours.
+Note 4: A pushed branch that is rebased needs a force push,
+        use "git push --force-with-lease" and only on your own branch.
+Note 5: "git reflog" shows the old commits if a rebase goes wrong.
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of rebase-notes.txt
