@@ -1,0 +1,45 @@
+==========================================
+ Git Project Repo - Folder 2 (gitfol2)
+==========================================
+
+File    : gitfl2.txt
+Folder  : gitfol2
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+This is the second sample file in Folder 2. Use it to practise
+"git cherry-pick": copying one chosen commit from another branch
+onto the current branch without merging the whole branch.
+
+------------------------------------------
+Cherry-pick Notes
+------------------------------------------
+Note 1: Cherry-pick copies a commit, it gets a new commit id.
+Note 2: The original commit stays on its own branch.
+Note 3: Conflicts are fixed the same way as in a merge.
+Note 4: Use "git cherry-pick --abort" to cancel half way.
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: Hello from the second file in Folder 2!
+Line 2: Change this line on a branch, then cherry-pick that commit.
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git switch -c feature-pick
+git add gitfol2/gitfl2.txt
+git commit -m "Update sample line in folder 2"
+git log --oneline -1
+git switch master
+git cherry-pick <commit-id>
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of gitfl2.txt
