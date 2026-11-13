@@ -16,6 +16,51 @@ working with branches: make changes on a new branch, then merge
 them back into the main branch.
 
 ------------------------------------------
+Working with Remotes
+------------------------------------------
+git remote -v              -> list the remotes linked to this repo
+git fetch origin           -> download new commits without merging
+git pull origin <branch>   -> fetch and merge a remote branch
+git push -u origin <branch> -> upload a branch and track it
+
+------------------------------------------
+Tagging Releases
+------------------------------------------
+git tag                     -> list all tags
+git tag -a v1.0 -m "msg"    -> create an annotated tag on this commit
+git show v1.0               -> see the tag and the commit it marks
+git push origin v1.0        -> upload a tag to the remote
+
+------------------------------------------
+Merge Types
+------------------------------------------
+Fast-forward : the branch pointer just moves ahead, no merge commit.
+Three-way    : both branches have new commits, Git makes a merge commit.
+Conflict     : both branches changed the same lines, you resolve by hand.
+
+------------------------------------------
+Inspecting History
+------------------------------------------
+git log --oneline      -> one line per commit, newest first
+git show <commit>      -> what a single commit changed
+git diff <a>..<b>      -> differences between two branches or commits
+git blame <file>       -> who last changed each line of a file
+
+------------------------------------------
+Ignoring Files (.gitignore)
+------------------------------------------
+*.log          -> ignore every file ending in .log
+build/         -> ignore the whole build folder
+!keep.log      -> but still track this one file
+git rm --cached <file> -> stop tracking a file that is already committed
+Rebasing Basics
+------------------------------------------
+git rebase master      -> replay this branch's commits on top of master
+git rebase --continue  -> carry on after fixing a conflict
+git rebase --abort     -> cancel and go back to how it was
+Never rebase commits that are already pushed and shared.
+
+------------------------------------------
 Sample Notes
 ------------------------------------------
 Note 1: Branches let you work on features without touching main.
@@ -23,6 +68,21 @@ Note 2: Commit often, with clear and short messages.
 Note 3: Change this line on a branch to see a merge in action.
 Note 4: Change it differently on main to practise a merge conflict.
 Note 5: Delete a branch after merging to keep the repo tidy.
+
+------------------------------------------
+Rebase Workflow
+------------------------------------------
+1. git switch <branch>     -> go to the branch that is behind
+2. git rebase master       -> replay its commits on top of master
+3. git switch master       -> go back to master
+4. git merge <branch>      -> fast-forward, no merge commit needed
+
+------------------------------------------
+Stashing Work
+------------------------------------------
+git stash        -> shelve uncommitted edits before switching branch
+git stash list   -> show everything that is shelved
+git stash pop    -> bring the latest shelved edits back
 
 ------------------------------------------
 Practice Commands

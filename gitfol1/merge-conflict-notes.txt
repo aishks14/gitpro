@@ -1,0 +1,207 @@
+==========================================
+ Git Project Repo - Folder 1 (gitfol1)
+==========================================
+
+File    : merge-conflict-notes.txt
+Folder  : gitfol1
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+Explains merge conflicts and the concepts around them: how a
+merge works, why a conflict appears, how to resolve one, and how
+to avoid them. It uses the real conflict from this repository,
+made on the aishks14-merge-conflict branch, as the worked example.
+
+------------------------------------------
+How a Merge Works
+------------------------------------------
+Git compares three versions of every file:
+
+Base   : the last commit both branches have in common (merge base)
+Ours   : the file on the branch you are on
+Theirs : the file on the branch you are merging in
+
+This is called a three-way merge. For each part of the file:
+- changed on one side only      -> Git takes that change
+- changed the same on both      -> Git takes it once
+- changed differently on both   -> CONFLICT, you must decide
+
+git merge-base <a> <b>   -> show the common commit of two branches
+
+------------------------------------------
+When a Conflict Happens
+------------------------------------------
+- Both branches edit the same line in different ways.
+- Both branches insert different lines at the same position.
+- One branch edits a file that the other branch deletes.
+- Both branches add a new file with the same name.
+
+------------------------------------------
+When It Does Not Happen
+------------------------------------------
+- The branches edit different files.
+- The branches edit different parts of the same file, with at
+  least one unchanged line between the two edits.
+- Only one branch has new commits (this is a fast-forward).
+
+This is why most sections in this repository merged cleanly: each
+one was added at a spot no other branch had touched.
+
+------------------------------------------
+Worked Example From This Repository
+------------------------------------------
+File          : gitfol1/gitfl2.txt
+Common base   : 339cfc6 "Add Tagging Releases section to gitfl2.txt"
+On master     : 4e19193 added "Ignoring Files (.gitignore)"
+On the branch : 85d17cb added "Rebasing Basics"
+Position      : both right after the "Inspecting History" section
+Merge commit  : 944b230 "Merge branch aishks14-merge-conflict"
+
+Both commits inserted different lines at exactly the same place,
+so Git could not tell which should come first and stopped with:
+
+  Auto-merging gitfol1/gitfl2.txt
+  CONFLICT (content): Merge conflict in gitfol1/gitfl2.txt
+  Automatic merge failed; fix conflicts and then commit the result.
+
+------------------------------------------
+Reading the Conflict Markers
+------------------------------------------
+Git writes both versions into the file between three markers:
+
+  <<<<<<< HEAD
+  Ignoring Files (.gitignore)
+  ...lines from master (ours)...
+  =======
+  Rebasing Basics
+  ...lines from the branch (theirs)...
+  >>>>>>> aishks14-merge-conflict
+
+<<<<<<< HEAD     : start of your version (the current branch)
+=======          : the divider between the two versions
+>>>>>>> <branch> : end of the incoming version
+
+Everything outside the markers was merged automatically.
+
+------------------------------------------
+Steps to Resolve
+------------------------------------------
+1. git status                -> lists files under "both modified"
+2. Open the file and find the markers.
+3. Keep one side, the other side, or both, and edit as needed.
+4. Delete all three marker lines.
+5. git add <file>            -> tells Git the conflict is fixed
+6. git commit                -> completes the merge
+
+git merge --abort            -> cancel and go back to before the merge
+
+------------------------------------------
+Lesson From the Worked Example
+------------------------------------------
+Both sections were kept, which was the right choice. But while
+removing the markers, the blank line and the dashed line above
+"Rebasing Basics" were deleted as well, so that heading now runs
+straight on from the last line of "Ignoring Files".
+
+Git only checks that the markers are gone; it cannot tell whether
+the result is correct. Always read the merged text again, or run
+"git diff" before committing the merge.
+
+------------------------------------------
+Taking One Side Completely
+------------------------------------------
+git restore --ours <file>     -> keep the current branch's version
+git restore --theirs <file>   -> keep the incoming branch's version
+git merge -X ours <branch>    -> on conflicts, prefer our side
+git merge -X theirs <branch>  -> on conflicts, prefer their side
+
+After restore, still run "git add <file>" to mark it resolved.
+
+------------------------------------------
+Types of Conflict
+------------------------------------------
+content        : both sides changed the same lines
+add/add        : both sides created a file with the same name
+modify/delete  : one side edited the file, the other deleted it
+rename/rename  : both sides renamed the same file differently
+binary         : images and similar files cannot be merged line by
+                 line, you must pick one whole version
+
+------------------------------------------
+Conflicts Outside "git merge"
+------------------------------------------
+The same markers appear in other commands. Only the finishing
+command changes:
+
+git rebase       -> fix, git add, then git rebase --continue
+git cherry-pick  -> fix, git add, then git cherry-pick --continue
+git stash pop    -> fix, git add; the stash is kept, drop it by hand
+git pull         -> it is a fetch plus a merge, resolve as a merge
+git revert       -> fix, git add, then git revert --continue
+
+During a rebase the meaning of ours and theirs is swapped: "ours"
+is the branch you are rebasing onto, "theirs" is your own commit.
+
+------------------------------------------
+Helpful Tools
+------------------------------------------
+VS Code shows buttons above each conflict: Accept Current Change,
+Accept Incoming Change, Accept Both Changes, Compare Changes.
+
+git diff                     -> shows the unresolved conflicts
+git log --merge              -> commits on both sides that touch the file
+git mergetool                -> open a visual merge tool
+git config --global merge.conflictStyle zdiff3
+                             -> also show the base version in the markers
+git config --global rerere.enabled true
+                             -> remember a resolution and reuse it
+
+------------------------------------------
+How to Avoid Conflicts
+------------------------------------------
+Note 1: Pull or merge master into your branch often, small
+        differences are easier to resolve than large ones.
+Note 2: Keep branches short-lived.
+Note 3: Make small commits that each do one thing.
+Note 4: Do not reformat a whole file in the same commit as a
+        real change.
+Note 5: Agree with teammates who is editing which file.
+Note 6: Add new content in its own place rather than rewriting
+        lines other people are working on.
+
+------------------------------------------
+Related Concepts
+------------------------------------------
+Fast-forward    : the target has no new commits, so the pointer
+                  just moves ahead. No merge commit, no conflict.
+Merge commit    : a commit with two parents that joins two histories.
+Merge base      : the most recent commit shared by both branches.
+Three-way merge : comparing base, ours and theirs to combine edits.
+Hunk            : one block of changed lines inside a diff.
+Ours / theirs   : the current branch / the branch being merged in.
+Squash merge    : combine a whole branch into one commit, no merge
+                  commit: git merge --squash <branch>
+Octopus merge   : merging more than two branches in one commit.
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git switch -c conflict-demo
+  edit Note 3 in gitfol1/gitfl2.txt
+git commit -am "Change Note 3 on the branch"
+git switch master
+  edit Note 3 in gitfol1/gitfl2.txt in a different way
+git commit -am "Change Note 3 on master"
+git merge conflict-demo
+  resolve the conflict in the file
+git add gitfol1/gitfl2.txt
+git commit
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of merge-conflict-notes.txt
