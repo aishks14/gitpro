@@ -1,0 +1,44 @@
+==========================================
+ Git Project Repo - Folder 2 (gitfol2)
+==========================================
+
+File    : gitfl1.txt
+Folder  : gitfol2
+Project : gitpro
+Author  : Aishwarya Kr Singh
+Created : 2026-11-13
+
+------------------------------------------
+Purpose
+------------------------------------------
+This is the first sample file in Folder 2. Use it to practise
+moving a branch backwards with "git reset" and recovering lost
+commits with "git reflog".
+
+------------------------------------------
+Reset Modes
+------------------------------------------
+git reset --soft HEAD~1   -> undo the commit, keep edits staged
+git reset --mixed HEAD~1  -> undo the commit, keep edits unstaged
+git reset --hard HEAD~1   -> undo the commit and discard the edits
+
+------------------------------------------
+Sample Content
+------------------------------------------
+Line 1: Hello from Folder 2!
+Line 2: Commit this line, then undo the commit with a soft reset.
+Line 3: Add more lines here to practise further commits.
+
+------------------------------------------
+Practice Commands
+------------------------------------------
+git add gitfol2/gitfl1.txt
+git commit -m "Add first sample file to folder 2"
+git reset --soft HEAD~1
+git status
+git reflog
+
+------------------------------------------
+Change Log
+------------------------------------------
+v1.0 - 2026-11-13 - Initial version of gitfl1.txt
