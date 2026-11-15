@@ -22,6 +22,7 @@ BUG-001 | Fixed   | Typo in the header of gitfl1.txt
 BUG-002 | Fixed   | Wrong folder name in the structure diagram
 BUG-003 | Open    | Missing change log entry in gitfl2.txt
 BUG-004 | Fixed   | Change this line to "Fixed" on a bugfix branch
+BUG-005 | Open    | Add a clear reproduction step for the reported issue
 
 ------------------------------------------
 Practice Commands
